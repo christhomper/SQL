@@ -1,10 +1,10 @@
 /********************************************************
-* This script creates the database named my_guitar_shop 
+* This script creates the database named my_music_shop 
 *********************************************************/
 
-DROP DATABASE IF EXISTS my_guitar_shop;
-CREATE DATABASE my_guitar_shop;
-USE my_guitar_shop;
+DROP DATABASE IF EXISTS my_music_shop;
+CREATE DATABASE my_music_shop;
+USE my_music_shop;
 
 -- create the tables for the database
 CREATE TABLE categories (
@@ -33,12 +33,8 @@ CREATE TABLE customers (
   first_name            VARCHAR(60)    NOT NULL,
   last_name             VARCHAR(60)    NOT NULL,
   shipping_address_id   INT                          DEFAULT NULL,
-  billing_address_id    INT                          DEFAULT NULL,
-  zip_code              VARCHAR(10)    NOT NULL      DEFAULT ''
+  billing_address_id    INT                          DEFAULT NULL
 );
-
--- Add index to the zip_code field in the Customers table
-CREATE INDEX idx_customers_zip_code ON customers (zip_code);
 
 CREATE TABLE addresses (
   address_id         INT            PRIMARY KEY   AUTO_INCREMENT,
@@ -168,8 +164,7 @@ INSERT INTO administrators (admin_id, email_address, password, first_name, last_
 (2, 'joel@murach.com', '971e95957d3b74d70d79c20c94e9cd91b85f7aae', 'Joel', 'Murach'),
 (3, 'mike@murach.com', '3f2975c819cefc686282456aeae3a137bf896ee8', 'Mike', 'Murach');
 
--- Create the user with password
-CREATE USER 'mgs_user'@'localhost' IDENTIFIED BY 'pa55word';
-
--- Grant privileges to the user on the my_guitar_shop database
-GRANT SELECT, INSERT, UPDATE, DELETE ON my_guitar_shop.* TO 'mgs_user'@'localhost';
+-- Create a user named mgs_user
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON my_music_shop.*
+TO mgs_user@localhost
